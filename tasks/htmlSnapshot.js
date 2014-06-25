@@ -75,6 +75,10 @@ module.exports = function(grunt) {
             if (options.removeMetaTags) {
                 msg = msg.replace(/<meta\s.*?(\/)?>/gi, '');
             }
+            
+            if (options.replaceLinks) {
+              msg = msg.replace(/<\s*a(.*?)href\s*=\s*(?:"|')(?:\/)(.*?)(?:"|')[^>]*>(.*?)<\s*?\/\s*?a\s*?>/gi, '<a $1 href="'+options.fileNamePrefix+'_$2.html">$3</a>');
+            }
 
             options.replaceStrings.forEach(function(obj) {
                 var key = Object.keys(obj);
